@@ -22,5 +22,12 @@ vim.keymap.set("n", "<leader><leader>", function()
 	" if you are currently editing a lua file, shout out it
 	elseif expand("%") =~ "\.lua$"
 		so
+	" nice C++ addition! Takes the input from a text file called input.txt in the project folder's root,
+	" and outputs directly to Windows's clipboard
+	" This version implements g++ with c++20
+	elseif expand("%") =~ "\.cpp$"
+		echom "Executing..."
+		silent execute("!g++ -std=c++20 % && xclip -i input.txt && xclip -o | ./a.out | xclip -selection c && rm a.out")
+		echom "C++ Executed!"
 	endif]])
 end)
